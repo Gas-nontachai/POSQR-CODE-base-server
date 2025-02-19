@@ -24,7 +24,6 @@ connection.connect(error => {
         console.error('Error connecting to the database:', error);
         return;
     }
-    console.log('======= Connected to the MySQL server =======');
 });
 
 app.listen(port, () => {

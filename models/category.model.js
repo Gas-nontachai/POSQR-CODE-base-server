@@ -3,12 +3,15 @@ const handleDbQuery = require('../utils/helper');
 
 const CategoryModel = {
   generateCategoryID: () => {
-    let code = `CAT${new Date().getFullYear()}`;
+    let now = new Date();
+    let code = `CAT${now.getFullYear().toString().slice(-2)}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}-`;
+
     let sql = `
-      SELECT CONCAT(${connection.escape(code)}, LPAD(IFNULL(MAX(CAST(SUBSTRING(category_id, ${code.length + 1}, 4) AS SIGNED)), 0) + 1, 4, '0')) AS id
+      SELECT CONCAT(${connection.escape(code)}, LPAD(IFNULL(MAX(CAST(SUBSTRING(category_id, ${code.length + 1}, 3) AS SIGNED)), 0) + 1, 3, '0')) AS id
       FROM tb_category
       WHERE category_id LIKE ${connection.escape(`${code}%`)}
     `;
+
     return handleDbQuery((cb) => connection.query(sql, cb));
   },
 
