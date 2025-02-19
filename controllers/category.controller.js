@@ -1,59 +1,30 @@
-const CategoryService = require("../services/category.service");
+const { CategoryService } = require("../services");
+const handleRequest = require("../utils/handleRequest");
 
 const CategoryController = {
-    async generateCategoryID(req, res) {
-        try {
-            const result = await CategoryService.generateCategoryID();
-            res.status(200).json(result);
-        } catch (error) {
-            res.status(500).json({ error: error.message });
-        }
-    },
+    generateCategoryID: handleRequest(async (req) => {
+        return await CategoryService.generateCategoryID();
+    }),
 
-    async getCategoryBy(req, res) {
-        try {
-            const result = await CategoryService.getCategoryBy(req.body);
-            res.status(200).json(result);
-        } catch (error) {
-            res.status(500).json({ error: error.message });
-        }
-    },
+    getCategoryBy: handleRequest(async (req) => {
+        return await CategoryService.getCategoryBy(req.body);
+    }),
 
-    async getCategoryByID(req, res) {
-        try {
-            const result = await CategoryService.getCategoryByID(req.body);
-            res.status(200).json(result);
-        } catch (error) {
-            res.status(404).json({ error: "Category not found" });
-        }
-    },
+    getCategoryByID: handleRequest(async (req) => {
+        return await CategoryService.getCategoryByID(req.body);
+    }),
 
-    async insertCategory(req, res) {
-        try {
-            const result = await CategoryService.insertCategory(req.body);
-            res.status(201).json(result);
-        } catch (error) {
-            res.status(500).json({ error: error.message });
-        }
-    },
+    insertCategory: handleRequest(async (req) => {
+        return await CategoryService.insertCategory(req.body);
+    }),
 
-    async updateCategoryBy(req, res) {
-        try {
-            const result = await CategoryService.updateCategoryBy(req.body);
-            res.status(200).json(result);
-        } catch (error) {
-            res.status(500).json({ error: error.message });
-        }
-    },
+    updateCategoryBy: handleRequest(async (req) => {
+        return await CategoryService.updateCategoryBy(req.body);
+    }),
 
-    async deleteCategoryBy(req, res) {
-        try {
-            await CategoryService.deleteCategoryBy(req.body);
-            res.status(200).json({ message: "Category deleted successfully" });
-        } catch (error) {
-            res.status(500).json({ error: error.message });
-        }
-    }
+    deleteCategoryBy: handleRequest(async (req) => {
+        return await CategoryService.deleteCategoryBy(req.body);
+    }),
 };
 
 module.exports = CategoryController;

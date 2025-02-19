@@ -1,68 +1,48 @@
 const connection = require('../config/db');
+const handleDbQuery = require('../utils/helper');
 
 const CategoryModel = {
-  generateCategoryID: () => new Promise((resolve, reject) => {
-    let code = `CAT${new Date().getFullYear()}`
+  generateCategoryID: () => {
+    let code = `CAT${new Date().getFullYear()}`;
     let sql = `
-            SELECT CONCAT(${connection.escape(code)}, LPAD(IFNULL(MAX(CAST(SUBSTRING(category_id, ${code.length + 1}, 4) AS SIGNED)), 0) + 1, 4, '0')) AS id
-            FROM tb_category
-            WHERE category_id LIKE ${connection.escape(`${code}%`)}
-        `;
-    connection.query(sql, (err, res) => {
-      if (err) return reject(new Error("Error generating category ID"));
-      resolve(res[0].id);
-    });
-  }),
+      SELECT CONCAT(${connection.escape(code)}, LPAD(IFNULL(MAX(CAST(SUBSTRING(category_id, ${code.length + 1}, 4) AS SIGNED)), 0) + 1, 4, '0')) AS id
+      FROM tb_category
+      WHERE category_id LIKE ${connection.escape(`${code}%`)}
+    `;
+    return handleDbQuery((cb) => connection.query(sql, cb));
+  },
 
-  getCategoryBy: (data = {}) => new Promise((resolve, reject) => {
+  getCategoryBy: () => {
     let sql = `SELECT * FROM tb_category`;
-    connection.query(sql, (err, res) => {
-      if (err) return reject(new Error(err.message));
-      resolve(res);
-    });
-  }),
+    return handleDbQuery((cb) => connection.query(sql, cb));
+  },
 
-  getCategoryByID: (data = {}) => new Promise((resolve, reject) => {
-    console.log(data);
-
+  getCategoryByID: (data = {}) => {
     let sql = `SELECT * FROM tb_category WHERE category_id = ${connection.escape(data.category_id)}`;
-    connection.query(sql, (err, res) => {
-      if (err) return reject(new Error(err.message));
-      if (!res.length) return reject(new Error('Category not found'));
-      resolve(res[0]);
-    });
-  }),
+    return handleDbQuery((cb) => connection.query(sql, cb));
+  },
 
-  insertCategory: (data = {}) => new Promise((resolve, reject) => {
+  insertCategory: (data = {}) => {
     let sql = `
-            INSERT INTO tb_category (category_id, category_name) 
-            VALUES (${connection.escape(data.category_id)}, ${connection.escape(data.category_name)})
-        `;
-    connection.query(sql, (err, res) => {
-      if (err) return reject(new Error(err.message));
-      resolve(res);
-    });
-  }),
+      INSERT INTO tb_category (category_id, category_name) 
+      VALUES (${connection.escape(data.category_id)}, ${connection.escape(data.category_name)})
+    `;
+    return handleDbQuery((cb) => connection.query(sql, cb));
+  },
 
-  updateCategoryBy: (data = {}) => new Promise((resolve, reject) => {
+  updateCategoryBy: (data = {}) => {
     let sql = `
-            UPDATE tb_category 
-            SET category_name = ${connection.escape(data.category_name)} 
-            WHERE category_id = ${connection.escape(data.category_id)}
-        `;
-    connection.query(sql, (err, res) => {
-      if (err) return reject(new Error(err.message));
-      resolve(res);
-    });
-  }),
+      UPDATE tb_category 
+      SET category_name = ${connection.escape(data.category_name)} 
+      WHERE category_id = ${connection.escape(data.category_id)}
+    `;
+    return handleDbQuery((cb) => connection.query(sql, cb));
+  },
 
-  deleteCategoryBy: (data = {}) => new Promise((resolve, reject) => {
+  deleteCategoryBy: (data = {}) => {
     let sql = `DELETE FROM tb_category WHERE category_id = ${connection.escape(data.category_id)}`;
-    connection.query(sql, (err, res) => {
-      if (err) return reject(new Error(err.message));
-      resolve(res);
-    });
-  })
+    return handleDbQuery((cb) => connection.query(sql, cb));
+  }
 };
 
 module.exports = CategoryModel;

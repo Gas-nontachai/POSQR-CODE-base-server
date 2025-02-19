@@ -1,19 +1,22 @@
-const CategoryModel = require("../models/category.model");
+const { CategoryModel } = require("../models/");
 
 const CategoryService = {
     async generateCategoryID() {
-        return await CategoryModel.generateCategoryID();
+        const res = await CategoryModel.generateCategoryID();
+        return res[0].id;
     },
 
-    async getCategoryBy(data) {
-        return await CategoryModel.getCategoryBy(data);
+    async getCategoryBy() {
+        return await CategoryModel.getCategoryBy();
     },
 
     async getCategoryByID(data) {
-        return await CategoryModel.getCategoryByID(data);
+        const res = await CategoryModel.getCategoryByID(data);
+        return res[0];
     },
 
     async insertCategory(data) {
+        data.category_id = await CategoryService.generateCategoryID(data);
         await CategoryModel.insertCategory(data);
         return await CategoryModel.getCategoryByID({ category_id: data.category_id });
     },
