@@ -15,11 +15,11 @@ const MenuController = {
     }),
 
     insertMenu: handleRequest(async (req) => {
-        return await MenuService.insertMenu(req.body);
+        return await MenuService.insertMenu(req.body, req.file);
     }),
 
     updateMenuBy: handleRequest(async (req) => {
-        return await MenuService.updateMenuBy(req.body);
+        return await MenuService.updateMenuBy(req.body, req.file);
     }),
 
     deleteMenuBy: handleRequest(async (req) => {
