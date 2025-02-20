@@ -14,7 +14,6 @@ const generateUserID = async (digits = 3) => {
         sequence = String(parseInt(sequence) + 1).padStart(digits, '0');
         newUserID = `U${today}-${sequence}`;
     }
-
     return newUserID;
 };
 
@@ -36,10 +35,6 @@ const insertUser = async (data) => {
 };
 
 const updateUserBy = async (data) => {
-    if (!data.add_date || (typeof data.add_date === 'string' && data.add_date.trim() === '')) {
-        data.add_date = new Date();
-    }
-
     return await UserModel.findOneAndUpdate(
         { user_id: data.user_id },
         { $set: data },
