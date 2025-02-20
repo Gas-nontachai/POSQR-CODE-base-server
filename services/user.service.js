@@ -17,7 +17,6 @@ const generateUserID = async (digits = 3) => {
     return newUserID;
 };
 
-
 const getUserBy = async () => {
     return await UserModel.find();
 };
@@ -41,7 +40,6 @@ const updateUserBy = async (data) => {
         { new: true, runValidators: true }
     );
 };
-
 
 const deleteUserBy = async (data) => {
     return await UserModel.findOneAndDelete({ user_id: data.user_id });
