@@ -1,34 +1,45 @@
-const { UserModel } = require("../models");
+const { UserModel } = require('../models');
 
-const UserService = {
-    async generateUserID() {
-        const res = await UserModel.generateUserID();
-        return res[0].id;
-    },
+const moment = require('moment');
 
-    async getUserBy() {
-        return await UserModel.getUserBy();
-    },
-
-    async getUserByID(data) {
-        const res = await UserModel.getUserByID(data);
-        return res[0];
-    },
-
-    async insertUser(data) {
-        data.user_id = await UserService.generateUserID(data);
-        await UserModel.insertUser(data);
-        return await UserModel.getUserByID({ user_id: data.user_id });
-    },
-
-    async updateUserBy(data) {
-        await UserModel.updateUserBy(data);
-        return await UserModel.getUserByID({ user_id: data.user_id });
-    },
-
-    async deleteUserBy(data) {
-        return await UserModel.deleteUserBy(data);
-    }
+const generateUserID = async (digits = 3) => {
+    const today = moment().format('YYMMDD');
+    const count = await UserModel.countDocuments();
+    const sequence = String(count + 1).padStart(digits, '0');
+    return `U${today}-${sequence}`;
 };
 
-module.exports = UserService;
+const getUserBy = async () => {
+    return await UserModel.find();
+};
+
+const getUserByID = async (data) => {
+    return await UserModel.find({ user_id: data.user_id });
+};
+
+const insertUser = async (data) => {
+    data.user_id = await generateUserID()
+    if (!data.add_date || (typeof data.add_date === 'string' && data.add_date.trim() === '')) {
+        data.add_date = new Date();
+    }
+    return await UserModel.create(data);
+};
+
+const updateUserBy = async (data) => {
+    if (!data.add_date || (typeof data.add_date === 'string' && data.add_date.trim() === '')) {
+        data.add_date = new Date();
+    }
+
+    return await UserModel.findOneAndUpdate(
+        { user_id: data.user_id },
+        { $set: data },
+        { new: true, runValidators: true }
+    );
+};
+
+
+const deleteUserBy = async (data) => {
+    return await UserModel.findOneAndDelete({ user_id: data.user_id });
+};
+
+module.exports = { generateUserID, getUserBy, getUserByID, insertUser, updateUserBy, deleteUserBy };

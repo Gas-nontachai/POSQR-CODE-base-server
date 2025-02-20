@@ -1,30 +1,26 @@
-const { UserService } = require("../services");
-const handleRequest = require("../utils/handleRequest");
+const { UserService } = require('../services');
+const handleRequest = require('../utils/handleRequest');
 
-const UserController = {
-    generateUserID: handleRequest(async (req) => {
-        return await UserService.generateUserID();
-    }),
+exports.generateUserID = handleRequest(async () => {
+    return await UserService.generateUserID();
+});
 
-    getUserBy: handleRequest(async (req) => {
-        return await UserService.getUserBy(req.body);
-    }),
+exports.getUserBy = handleRequest(async () => {
+    return await UserService.getUserBy();
+});
 
-    getUserByID: handleRequest(async (req) => {
-        return await UserService.getUserByID(req.body);
-    }),
+exports.getUserByID = handleRequest(async (req) => {
+    return await UserService.getUserByID(req.body);
+});
 
-    insertUser: handleRequest(async (req) => {
-        return await UserService.insertUser(req.body);
-    }),
+exports.insertUser = handleRequest(async (req) => {
+    return await UserService.insertUser(req.body);
+});
 
-    updateUserBy: handleRequest(async (req) => {
-        return await UserService.updateUserBy(req.body);
-    }),
+exports.updateUserBy = handleRequest(async (req) => {
+    return await UserService.updateUserBy(req.body);
+});
 
-    deleteUserBy: handleRequest(async (req) => {
-        return await UserService.deleteUserBy(req.body);
-    }),
-};
-
-module.exports = UserController;
+exports.deleteUserBy = handleRequest(async (req) => {
+    return await UserService.deleteUserBy(req.body);
+});

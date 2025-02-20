@@ -1,33 +1,22 @@
+const mongoose = require('mongoose');
 const express = require('express');
 const cors = require('cors');
-const bodyParser = require('body-parser');
-const mysql = require('mysql2');
 const dotenv = require("dotenv");
 
 dotenv.config();
 const app = express();
-
-const port = 5120;
+const PORT = process.env.PORT || 5120;
 
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
 
-const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'posqr-code'
+mongoose.connect(process.env.MONGO_URI)
+    .then(() => console.log('======= MongoDB Connected ======='))
+    .catch(err => console.error('MongoDB Connection Error:', err));
+
+const routes = require('./routes');
+routes(app);
+
+app.listen(PORT, () => {
+    console.log(`======= Server is running on port ${PORT} =======`);
 });
-
-connection.connect(error => {
-    if (error) {
-        console.error('Error connecting to the database:', error);
-        return;
-    }
-});
-
-app.listen(port, () => {
-    console.log(`=======  Server is running on port ${port} ======= `);
-});
-
-require('./routes')(app)
