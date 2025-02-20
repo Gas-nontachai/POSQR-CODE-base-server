@@ -22,5 +22,5 @@ exports.updateUserBy = handleRequest(async (req) => {
 });
 
 exports.deleteUserBy = handleRequest(async (req) => {
-    return await UserService.deleteUserBy(req.body);
+ return await UserService.deleteUserBy(req.body);
 });
