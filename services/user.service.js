@@ -4,10 +4,20 @@ const moment = require('moment');
 
 const generateUserID = async (digits = 3) => {
     const today = moment().format('YYMMDD');
-    const count = await UserModel.countDocuments();
-    const sequence = String(count + 1).padStart(digits, '0');
-    return `U${today}-${sequence}`;
+    const latestUser = await UserModel.findOne().sort({ _id: -1 });
+
+    const lastSequence = latestUser ? parseInt(latestUser.user_id.split('-')[1]) : 0;
+    let sequence = String(lastSequence + 1).padStart(digits, '0');
+
+    let newUserID = `U${today}-${sequence}`;
+    while (await UserModel.exists({ user_id: newUserID })) {
+        sequence = String(parseInt(sequence) + 1).padStart(digits, '0');
+        newUserID = `U${today}-${sequence}`;
+    }
+
+    return newUserID;
 };
+
 
 const getUserBy = async () => {
     return await UserModel.find();
