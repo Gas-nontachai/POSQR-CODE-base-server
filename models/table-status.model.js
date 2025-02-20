@@ -8,6 +8,6 @@ const tableStatusSchema = new mongoose.Schema(
     }
 );
 
-const TableStatus = mongoose.model('tb_table_statuss', tableStatusSchema);
+const TableStatus = mongoose.model('tb_table_status', tableStatusSchema);
 
 module.exports = TableStatus;
