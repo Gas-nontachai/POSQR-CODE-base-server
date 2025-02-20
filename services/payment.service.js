@@ -22,7 +22,8 @@ const getPaymentBy = async () => {
 };
 
 const getPaymentByID = async (data) => {
-    return await PaymentModel.find({ payment_id: data.payment_id });
+    const res = await PaymentModel.find({ payment_id: data.payment_id });
+    return res[0]
 };
 
 const insertPayment = async (data) => {

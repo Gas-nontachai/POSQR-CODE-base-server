@@ -22,7 +22,8 @@ const getCategoryBy = async () => {
 };
 
 const getCategoryByID = async (data) => {
-    return await CategoryModel.find({ category_id: data.category_id });
+    const res = await CategoryModel.find({ category_id: data.category_id });
+    return res[0]
 };
 
 const insertCategory = async (data) => {

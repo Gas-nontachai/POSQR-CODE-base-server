@@ -22,7 +22,8 @@ const getUserRoleBy = async () => {
 };
 
 const getUserRoleByID = async (data) => {
-    return await UserRoleModel.find({ user_role_id: data.user_role_id });
+    const res = await UserRoleModel.find({ user_role_id: data.user_role_id });
+    return res[0]
 };
 
 const insertUserRole = async (data) => {

@@ -22,7 +22,8 @@ const getMenuBy = async () => {
 };
 
 const getMenuByID = async (data) => {
-    return await MenuModel.find({ menu_id: data.menu_id });
+    const res = await MenuModel.find({ menu_id: data.menu_id });
+    return res[0]
 };
 
 const insertMenu = async (data) => {

@@ -22,7 +22,8 @@ const getTableBy = async () => {
 };
 
 const getTableByID = async (data) => {
-    return await TableModel.find({ table_id: data.table_id });
+    const res = await TableModel.find({ table_id: data.table_id });
+    return res[0]
 };
 
 const insertTable = async (data) => {

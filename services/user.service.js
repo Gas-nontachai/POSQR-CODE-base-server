@@ -22,7 +22,8 @@ const getUserBy = async () => {
 };
 
 const getUserByID = async (data) => {
-    return await UserModel.find({ user_id: data.user_id });
+    const res = await UserModel.find({ user_id: data.user_id });
+    return res[0]
 };
 
 const insertUser = async (data) => {

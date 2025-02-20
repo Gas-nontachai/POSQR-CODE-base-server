@@ -22,7 +22,8 @@ const getOrderBy = async () => {
 };
 
 const getOrderByID = async (data) => {
-    return await OrderModel.find({ order_id: data.order_id });
+    const res = await OrderModel.find({ order_id: data.order_id });
+    return res[0]
 };
 
 const insertOrder = async (data) => {

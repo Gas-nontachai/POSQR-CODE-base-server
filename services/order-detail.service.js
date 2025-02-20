@@ -22,7 +22,8 @@ const getOrderDetailBy = async () => {
 };
 
 const getOrderDetailByID = async (data) => {
-    return await OrderDetailModel.find({ order_detail_id: data.order_detail_id });
+    const res = await OrderDetailModel.find({ order_detail_id: data.order_detail_id });
+    return res[0]
 };
 
 const insertOrderDetail = async (data) => {
