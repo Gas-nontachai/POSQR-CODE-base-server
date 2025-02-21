@@ -9,7 +9,7 @@ const menuSchema = new mongoose.Schema(
         category: { type: String, },
         add_date: { type: Date, default: Date.now }
     }
-);
+);  
 
 const Menu = mongoose.model('tb_menus', menuSchema);
 
