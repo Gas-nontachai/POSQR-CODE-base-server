@@ -31,7 +31,12 @@ const insertUser = async (data) => {
     if (!data.add_date || (typeof data.add_date === 'string' && data.add_date.trim() === '')) {
         data.add_date = new Date();
     }
-    return await UserModel.create(data);
+    if (data.user_img) {
+        data.user_img = data.user_img;
+    }
+    console.log(data);
+
+    // return await UserModel.create(data);
 };
 
 const updateUserBy = async (data) => {
