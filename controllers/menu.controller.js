@@ -1,6 +1,10 @@
 const { MenuService } = require('../services');
 const handleRequest = require('../utils/handleRequest');
 
+const getImagePath = (req) => {
+    return req.file ? `/menu_img/${req.file.filename}` : null;
+};
+
 exports.generateMenuID = handleRequest(async () => {
     return await MenuService.generateMenuID();
 });
@@ -14,11 +18,21 @@ exports.getMenuByID = handleRequest(async (req) => {
 });
 
 exports.insertMenu = handleRequest(async (req) => {
-    return await MenuService.insertMenu(req.body);
+    const imagePath = getImagePath(req);
+    const data = {
+        ...req.body,
+        menu_img: imagePath,
+    };
+    return await MenuService.insertMenu(data);
 });
 
 exports.updateMenuBy = handleRequest(async (req) => {
-    return await MenuService.updateMenuBy(req.body);
+    const imagePath = getImagePath(req);
+    const data = {
+        ...req.body,
+        menu_img: imagePath,
+    };
+    return await MenuService.updateMenuBy(data);
 });
 
 exports.deleteMenuBy = handleRequest(async (req) => {
