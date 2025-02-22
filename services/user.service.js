@@ -34,9 +34,7 @@ const insertUser = async (data) => {
     if (data.user_img) {
         data.user_img = data.user_img;
     }
-    console.log(data);
-
-    // return await UserModel.create(data);
+    return await UserModel.create(data);
 };
 
 const updateUserBy = async (data) => {

@@ -1,4 +1,5 @@
 module.exports = {
+    BillController: require('./bill.controller'),
     CategoryController: require('./category.controller'),
     MenuController: require('./menu.controller'),
     OrderController: require('./order.controller'),
