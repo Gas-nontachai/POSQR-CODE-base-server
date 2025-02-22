@@ -7,8 +7,8 @@ const menuSchema = new mongoose.Schema(
         menu_price: { type: Number, required: true },
         menu_img: { type: String, },
         menu_status: { type: String },
-        menu_amount: { type: String },
-        menu_category: { type: String, },
+        menu_amount: { type: Number },
+        category_name: { type: String, },
         add_date: { type: Date, default: Date.now }
     }
 );
