@@ -3,6 +3,7 @@ module.exports = (app) => {
         res.send('Hello World!');
     });
 
+    app.use(`/bill`, require("./bill.route"));
     app.use(`/category`, require("./category.route"));
     app.use(`/menu`, require("./menu.route"));
     app.use(`/order`, require("./order.route"));

@@ -1,4 +1,5 @@
 module.exports = {
+    BillService: require('./bill.service'),
     CategoryService: require('./category.service'),
     MenuService: require('./menu.service'),
     OrderService: require('./order.service'),
