@@ -9,10 +9,10 @@ const generateCartID = async (digits = 3) => {
     const lastSequence = latestCart ? parseInt(latestCart.cart_id.split('-')[1]) : 0;
     let sequence = String(lastSequence + 1).padStart(digits, '0');
 
-    let newCartID = `CT${today}-${sequence}`;
+    let newCartID = `CART${today}-${sequence}`;
     while (await CartModel.exists({ cart_id: newCartID })) {
         sequence = String(parseInt(sequence) + 1).padStart(digits, '0');
-        newCartID = `CT${today}-${sequence}`;
+        newCartID = `CART${today}-${sequence}`;
     }
     return newCartID;
 };
@@ -31,7 +31,9 @@ const insertCart = async (data) => {
     if (!data.add_date || (typeof data.add_date === 'string' && data.add_date.trim() === '')) {
         data.add_date = new Date();
     }
-    return await CartModel.create(data);
+    console.log(data);
+
+    // return await CartModel.create(data);
 };
 
 const updateCartBy = async (data) => {
