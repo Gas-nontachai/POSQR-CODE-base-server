@@ -1,6 +1,7 @@
 module.exports = {
     BillModel: require('./bill.model'),
     CategoryModel: require('./category.model'),
+    CartModel: require('./cart.model'),
     MenuModel: require('./menu.model'),
     OrderModel: require('./order.model'),
     OrderDetailModel: require('./order-detail.model'),
