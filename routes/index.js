@@ -5,6 +5,7 @@ module.exports = (app) => {
 
     app.use(`/bill`, require("./bill.route"));
     app.use(`/category`, require("./category.route"));
+    app.use(`/cart`, require("./cart.route"));
     app.use(`/menu`, require("./menu.route"));
     app.use(`/order`, require("./order.route"));
     app.use(`/order-detail`, require("./order-detail.route"));
