@@ -17,8 +17,8 @@ const generateUserID = async (digits = 3) => {
     return newUserID;
 };
 
-const getUserBy = async () => {
-    return await UserModel.find();
+const getUserBy = async (data) => {
+    return await UserModel.find(data);
 };
 
 const getUserByID = async (data) => {

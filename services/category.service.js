@@ -17,8 +17,8 @@ const generateCategoryID = async (digits = 3) => {
     return newCategoryID;
 };
 
-const getCategoryBy = async () => {
-    return await CategoryModel.find();
+const getCategoryBy = async (data) => {
+    return await CategoryModel.find(data);
 };
 
 const getCategoryByID = async (data) => {

@@ -1,5 +1,5 @@
 const { BillModel } = require('../models');
-
+const filterEmthyKey = require('../utils/filterEmthyKey');
 const moment = require('moment');
 
 const generateBillID = async (digits = 3) => {
@@ -27,7 +27,10 @@ const getBillByID = async (data) => {
 };
 
 const insertBill = async (data) => {
-    data.bill_id = await generateBillID()
+    data.bill_id = await generateBillID();
+
+    data._id && delete data._id;
+
     if (!data.add_date || (typeof data.add_date === 'string' && data.add_date.trim() === '')) {
         data.add_date = new Date();
     }
@@ -35,18 +38,26 @@ const insertBill = async (data) => {
         data.start_time = new Date();
     }
     if (!data.expired_time || (typeof data.expired_time === 'string' && data.expired_time.trim() === '')) {
-        const expired_time = new Date()
+        const expired_time = new Date();
         expired_time.setHours(expired_time.getHours() + 1);
         expired_time.setMinutes(expired_time.getMinutes() + 30);
-        data.expired_time = expired_time
+        data.expired_time = expired_time;
     }
+
     return await BillModel.create(data);
 };
 
+
 const updateBillBy = async (data) => {
+    const updateFields = filterEmthyKey(data, ["bill_id"]);
+
+    if (Object.keys(updateFields).length === 0) {
+        throw new Error("No valid fields to update.");
+    }
+
     return await BillModel.findOneAndUpdate(
         { bill_id: data.bill_id },
-        { $set: data },
+        { $set: updateFields },
         { new: true, runValidators: true }
     );
 };

@@ -5,8 +5,8 @@ exports.generateCategoryID = handleRequest(async () => {
     return await CategoryService.generateCategoryID();
 });
 
-exports.getCategoryBy = handleRequest(async () => {
-    return await CategoryService.getCategoryBy();
+exports.getCategoryBy = handleRequest(async (req) => {
+    return await CategoryService.getCategoryBy(req.body);
 });
 
 exports.getCategoryByID = handleRequest(async (req) => {

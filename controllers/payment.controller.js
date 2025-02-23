@@ -5,8 +5,8 @@ exports.generatePaymentID = handleRequest(async () => {
     return await PaymentService.generatePaymentID();
 });
 
-exports.getPaymentBy = handleRequest(async () => {
-    return await PaymentService.getPaymentBy();
+exports.getPaymentBy = handleRequest(async (req) => {
+    return await PaymentService.getPaymentBy(req.body);
 });
 
 exports.getPaymentByID = handleRequest(async (req) => {

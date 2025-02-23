@@ -17,8 +17,8 @@ const generateOrderDetailID = async (digits = 3) => {
     return newOrderDetailID;
 };
 
-const getOrderDetailBy = async () => {
-    return await OrderDetailModel.find();
+const getOrderDetailBy = async (data) => {
+    return await OrderDetailModel.find(data);
 };
 
 const getOrderDetailByID = async (data) => {

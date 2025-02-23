@@ -5,8 +5,8 @@ exports.generateQrCodeID = handleRequest(async () => {
     return await QrCodeService.generateQrCodeID();
 });
 
-exports.getQrCodeBy = handleRequest(async () => {
-    return await QrCodeService.getQrCodeBy();
+exports.getQrCodeBy = handleRequest(async (req) => {
+    return await QrCodeService.getQrCodeBy(req.body);
 });
 
 exports.getQrCodeByID = handleRequest(async (req) => {

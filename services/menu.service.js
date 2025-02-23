@@ -17,8 +17,8 @@ const generateMenuID = async (digits = 3) => {
     return newMenuID;
 };
 
-const getMenuBy = async () => {
-    return await MenuModel.find();
+const getMenuBy = async (data) => {
+    return await MenuModel.find(data);
 };
 
 const getMenuByID = async (data) => {

@@ -11,9 +11,20 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
 
-mongoose.connect(process.env.MONGO_URI)
-    .then(() => console.log('======= MongoDB Connected ======='))
-    .catch(err => console.error('MongoDB Connection Error:', err));
+const connectDB = async () => {
+    try {
+        await mongoose.connect(process.env.MONGO_URI);
+        console.log('======= MongoDB Connected =======');
+
+        const { BillModel } = require('./models');
+
+        await BillModel.collection.dropIndexes();
+    } catch (err) {
+        console.error('MongoDB Connection Error:', err);
+    }
+};
+
+connectDB();
 
 const routes = require('./routes');
 routes(app);

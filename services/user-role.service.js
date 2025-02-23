@@ -17,8 +17,8 @@ const generateUserRoleID = async (digits = 3) => {
     return newUserRoleID;
 };
 
-const getUserRoleBy = async () => {
-    return await UserRoleModel.find();
+const getUserRoleBy = async (data) => {
+    return await UserRoleModel.find(data);
 };
 
 const getUserRoleByID = async (data) => {

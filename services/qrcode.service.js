@@ -17,8 +17,8 @@ const generateQrCodeID = async (digits = 3) => {
     return newQrCodeID;
 };
 
-const getQrCodeBy = async () => {
-    return await QrCodeModel.find();
+const getQrCodeBy = async (data) => {
+    return await QrCodeModel.find(data);
 };
 
 const getQrCodeByID = async (data) => {

@@ -5,8 +5,8 @@ exports.generateUserRoleID = handleRequest(async () => {
     return await UserRoleService.generateUserRoleID();
 });
 
-exports.getUserRoleBy = handleRequest(async () => {
-    return await UserRoleService.getUserRoleBy();
+exports.getUserRoleBy = handleRequest(async (req) => {
+    return await UserRoleService.getUserRoleBy(req.body);
 });
 
 exports.getUserRoleByID = handleRequest(async (req) => {

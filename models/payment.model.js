@@ -3,9 +3,11 @@ const mongoose = require('mongoose');
 const paymentSchema = new mongoose.Schema(
     {
         payment_id: { type: String, required: true, unique: true },
-        table_id: { type: String, required: true },
-        amount: { type: Number, required: true },
-        payment_status: { type: String, required: true },
+        bill_id: { type: String, required: true },
+        table_id: { type: String },
+        amount_total: { type: Number },
+        payment_method: { type: String },
+        payment_status: { type: String },
         payment_time: { type: Date, default: Date.now }
     }
 );

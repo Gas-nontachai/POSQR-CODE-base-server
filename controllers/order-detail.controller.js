@@ -5,8 +5,8 @@ exports.generateOrderDetailID = handleRequest(async () => {
     return await OrderDetailService.generateOrderDetailID();
 });
 
-exports.getOrderDetailBy = handleRequest(async () => {
-    return await OrderDetailService.getOrderDetailBy();
+exports.getOrderDetailBy = handleRequest(async (req) => {
+    return await OrderDetailService.getOrderDetailBy(req.body);
 });
 
 exports.getOrderDetailByID = handleRequest(async (req) => {

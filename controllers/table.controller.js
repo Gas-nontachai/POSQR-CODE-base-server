@@ -5,8 +5,8 @@ exports.generateTableID = handleRequest(async () => {
     return await TableService.generateTableID();
 });
 
-exports.getTableBy = handleRequest(async () => {
-    return await TableService.getTableBy();
+exports.getTableBy = handleRequest(async (req) => {
+    return await TableService.getTableBy(req.body);
 });
 
 exports.getTableByID = handleRequest(async (req) => {

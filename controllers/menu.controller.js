@@ -9,8 +9,8 @@ exports.generateMenuID = handleRequest(async () => {
     return await MenuService.generateMenuID();
 });
 
-exports.getMenuBy = handleRequest(async () => {
-    return await MenuService.getMenuBy();
+exports.getMenuBy = handleRequest(async (req) => {
+    return await MenuService.getMenuBy(req.body);
 });
 
 exports.getMenuByID = handleRequest(async (req) => {

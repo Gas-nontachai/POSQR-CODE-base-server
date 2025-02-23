@@ -17,8 +17,8 @@ const generateTableID = async (digits = 3) => {
     return newTableID;
 };
 
-const getTableBy = async () => {
-    return await TableModel.find();
+const getTableBy = async (data) => {
+    return await TableModel.find(data);
 };
 
 const getTableByID = async (data) => {

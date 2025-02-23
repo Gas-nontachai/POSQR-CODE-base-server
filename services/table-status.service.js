@@ -17,8 +17,8 @@ const generateTableStatusID = async (digits = 3) => {
     return newTableStatusID;
 };
 
-const getTableStatusBy = async () => {
-    return await TableStatusModel.find();
+const getTableStatusBy = async (data) => {
+    return await TableStatusModel.find(data);
 };
 
 const getTableStatusByID = async (data) => {

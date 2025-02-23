@@ -22,12 +22,7 @@ exports.insertBill = handleRequest(async (req) => {
 });
 
 exports.updateBillBy = handleRequest(async (req) => {
-    const imagePath = getImagePath(req)
-    const data = {
-        ...req.body,
-        bill_img: imagePath
-    }
-    return await BillService.updateBillBy(data);
+    return await BillService.updateBillBy(req.body);
 });
 
 exports.deleteBillBy = handleRequest(async (req) => {

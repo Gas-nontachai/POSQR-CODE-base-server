@@ -9,8 +9,8 @@ exports.generateUserID = handleRequest(async () => {
     return await UserService.generateUserID();
 });
 
-exports.getUserBy = handleRequest(async () => {
-    return await UserService.getUserBy();
+exports.getUserBy = handleRequest(async (req) => {
+    return await UserService.getUserBy(req.body);
 });
 
 exports.getUserByID = handleRequest(async (req) => {

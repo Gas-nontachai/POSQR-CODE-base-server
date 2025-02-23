@@ -5,8 +5,8 @@ exports.generateTableStatusID = handleRequest(async () => {
     return await TableStatusService.generateTableStatusID();
 });
 
-exports.getTableStatusBy = handleRequest(async () => {
-    return await TableStatusService.getTableStatusBy();
+exports.getTableStatusBy = handleRequest(async (req) => {
+    return await TableStatusService.getTableStatusBy(req.body);
 });
 
 exports.getTableStatusByID = handleRequest(async (req) => {
