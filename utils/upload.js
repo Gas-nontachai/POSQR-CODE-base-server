@@ -1,7 +1,7 @@
 const path = require("path");
 const fs = require("fs");
 const multer = require("multer");
-const { v4: uuidv4 } = require('uuid')
+const { v4: uuidv4 } = require('uuid');
 
 const uploadDirectory = path.join(__dirname, "../public/");
 
@@ -11,8 +11,7 @@ if (!fs.existsSync(uploadDirectory)) {
 
 const storage = (folder) => multer.diskStorage({
     destination: function (req, file, cb) {
-        const folderPath = path.join(uploadDirectory, folder || 'default');
-
+        const folderPath = path.join(uploadDirectory, folder || 'default'); 
         if (!fs.existsSync(folderPath)) {
             fs.mkdirSync(folderPath, { recursive: true });
         }
@@ -38,27 +37,26 @@ const fileFilter = (req, file, cb) => {
 const upload = (folder) => multer({
     storage: storage(folder),
     fileFilter: fileFilter,
-    limits: { fileSize: 5 * 1024 * 1024 }
+    limits: { fileSize: 5 * 1024 * 1024 } 
 });
 
 module.exports = {
     storage,
     uploadSingle: (folder) => upload(folder).single("menu_img"),
-    uploadMultiple: (folder) => upload(folder).array("menu_img", 5),
-    removeFile: (filePath) => {
+    uploadMultiple: (folder) => upload(folder).array("menu_img", 5), 
+    removeFile: async (filePath) => {
         const fileToDelete = path.join(__dirname, "../public", filePath);
-        fs.access(fileToDelete, fs.constants.F_OK, (err) => {
-            if (err) {
+        
+        try {
+            await fs.promises.access(fileToDelete, fs.constants.F_OK);
+            await fs.promises.unlink(fileToDelete);
+            console.log("File deleted successfully:", fileToDelete);
+        } catch (err) {
+            if (err.code === 'ENOENT') {
                 console.log("File does not exist:", fileToDelete);
-                return;
-            } 
-            fs.unlink(fileToDelete, (err) => {
-                if (err) {
-                    console.log("Error deleting file:", err);
-                } else {
-                    console.log("File deleted successfully:", fileToDelete);
-                }
-            });
-        });
+            } else {
+                console.log("Error deleting file:", err);
+            }
+        }
     }
 };

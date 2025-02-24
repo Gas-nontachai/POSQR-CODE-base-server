@@ -12,6 +12,6 @@ router.post("/getMenuBy", MenuController.getMenuBy);
 router.post("/getMenuByID", MenuController.getMenuByID);
 router.post("/insertMenu", uploadSingle(path), MenuController.insertMenu);
 router.post("/updateMenuBy", uploadSingle(path), MenuController.updateMenuBy);
-router.post("/deleteMenuBy", MenuController.deleteMenuBy);
+router.post("/deleteMenuBy", uploadSingle(path), MenuController.deleteMenuBy);
 
 module.exports = router;

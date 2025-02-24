@@ -29,18 +29,26 @@ exports.insertMenu = handleRequest(async (req) => {
 
 exports.updateMenuBy = handleRequest(async (req) => {
     const imagePath = getImagePath(req); 
-    const oldMenu = await MenuService.getMenuByID(req.body); 
+    const oldMenu = await MenuService.getMenuByID(req.body);    
+    
     if (oldMenu && oldMenu.menu_img) {
-        const oldImagePath = oldMenu.menu_img;
-        removeFile(oldImagePath); 
+        const oldImagePath = oldMenu.menu_img;  
+        removeFile(oldImagePath);
     } 
     const data = {
         ...req.body,
         menu_img: imagePath,
-    }; 
+    };  
     return await MenuService.updateMenuBy(data);
 });
 
+
 exports.deleteMenuBy = handleRequest(async (req) => {
+    const menuID = req.body.menu_id; 
+    const oldMenu = await MenuService.getMenuByID({ menu_id: menuID }); 
+    if (oldMenu && oldMenu.menu_img) {
+        const oldImagePath = oldMenu.menu_img;
+        removeFile(oldImagePath);
+    } 
     return await MenuService.deleteMenuBy(req.body);
 });
