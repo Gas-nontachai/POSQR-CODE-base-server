@@ -27,7 +27,7 @@ const getBillByID = async (data) => {
 };
 
 const insertBill = async (data) => {
-    data.bill_id = await generateBillID();
+    data.bill_id ? data.bill_id : data.bill_id = await generateBillID();
 
     data._id && delete data._id;
 
@@ -46,7 +46,6 @@ const insertBill = async (data) => {
 
     return await BillModel.create(data);
 };
-
 
 const updateBillBy = async (data) => {
     const updateFields = filterEmthyKey(data, ["bill_id"]);
