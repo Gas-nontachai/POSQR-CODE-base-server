@@ -1,4 +1,5 @@
 const { OrderModel } = require('../models');
+const { updateCartBy } = require('../services/cart.service');
 
 const moment = require('moment');
 
@@ -27,10 +28,20 @@ const getOrderByID = async (data) => {
 };
 
 const insertOrder = async (data) => {
+    let dataUpdate
     data.order_id = await generateOrderID()
-    if (!data.add_date || (typeof data.add_date === 'string' && data.add_date.trim() === '')) {
-        data.add_date = new Date();
+    if (!data.order_time || (typeof data.order_time === 'string' && data.order_time.trim() === '')) {
+        data.order_time = new Date();
     }
+    data.order_items && (
+        data.order_items.forEach(async element => {
+            dataUpdate = {
+                cart_id: element.cart_id,
+                cart_status: 'in-active'
+            }
+            await updateCartBy(dataUpdate)
+        })
+    )
     return await OrderModel.create(data);
 };
 

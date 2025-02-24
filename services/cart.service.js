@@ -1,4 +1,5 @@
 const { CartModel } = require('../models');
+const filterEmthyKey = require('../utils/filterEmthyKey');
 
 const moment = require('moment');
 
@@ -35,9 +36,16 @@ const insertCart = async (data) => {
 };
 
 const updateCartBy = async (data) => {
+    console.log(data);
+
+    const updateFields = filterEmthyKey(data, ["cart_id"]);
+
+    if (Object.keys(updateFields).length === 0) {
+        throw new Error("No valid fields to update.");
+    }
     return await CartModel.findOneAndUpdate(
         { cart_id: data.cart_id },
-        { $set: data },
+        { $set: updateFields },
         { new: true, runValidators: true }
     );
 };
