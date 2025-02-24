@@ -5,8 +5,8 @@ exports.generateCartID = handleRequest(async () => {
     return await CartService.generateCartID();
 });
 
-exports.getCartBy = handleRequest(async () => {
-    return await CartService.getCartBy();
+exports.getCartBy = handleRequest(async (req) => {
+    return await CartService.getCartBy(req.body);
 });
 
 exports.getCartByID = handleRequest(async (req) => {

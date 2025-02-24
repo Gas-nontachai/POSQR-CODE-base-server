@@ -17,8 +17,8 @@ const generateCartID = async (digits = 3) => {
     return newCartID;
 };
 
-const getCartBy = async () => {
-    return await CartModel.find();
+const getCartBy = async (data) => {
+    return await CartModel.find(data);
 };
 
 const getCartByID = async (data) => {
@@ -31,9 +31,7 @@ const insertCart = async (data) => {
     if (!data.add_date || (typeof data.add_date === 'string' && data.add_date.trim() === '')) {
         data.add_date = new Date();
     }
-    console.log(data);
-
-    // return await CartModel.create(data);
+    return await CartModel.create(data);
 };
 
 const updateCartBy = async (data) => {
