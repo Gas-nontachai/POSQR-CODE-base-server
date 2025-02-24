@@ -1,5 +1,6 @@
 const { MenuService } = require('../services');
 const handleRequest = require('../utils/handleRequest');
+const { removeFile } = require("../utils/upload");
 
 const getImagePath = (req) => {
     return req.file ? `/menu_img/${req.file.filename}` : null;
@@ -27,11 +28,16 @@ exports.insertMenu = handleRequest(async (req) => {
 });
 
 exports.updateMenuBy = handleRequest(async (req) => {
-    const imagePath = getImagePath(req);
+    const imagePath = getImagePath(req); 
+    const oldMenu = await MenuService.getMenuByID(req.body); 
+    if (oldMenu && oldMenu.menu_img) {
+        const oldImagePath = oldMenu.menu_img;
+        removeFile(oldImagePath); 
+    } 
     const data = {
         ...req.body,
         menu_img: imagePath,
-    };
+    }; 
     return await MenuService.updateMenuBy(data);
 });
 

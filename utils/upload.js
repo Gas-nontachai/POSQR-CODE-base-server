@@ -45,16 +45,13 @@ module.exports = {
     storage,
     uploadSingle: (folder) => upload(folder).single("menu_img"),
     uploadMultiple: (folder) => upload(folder).array("menu_img", 5),
-
     removeFile: (filePath) => {
-        const fileToDelete = path.join(__dirname, filePath);
-
+        const fileToDelete = path.join(__dirname, "../public", filePath);
         fs.access(fileToDelete, fs.constants.F_OK, (err) => {
             if (err) {
                 console.log("File does not exist:", fileToDelete);
                 return;
-            }
-
+            } 
             fs.unlink(fileToDelete, (err) => {
                 if (err) {
                     console.log("Error deleting file:", err);
