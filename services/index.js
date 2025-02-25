@@ -11,4 +11,5 @@ module.exports = {
     TableStatusService: require('./table-status.service'),
     UserService: require('./user.service'),
     UserRoleService: require('./user-role.service'),
+    StoresService: require('./stores.service'),
 };

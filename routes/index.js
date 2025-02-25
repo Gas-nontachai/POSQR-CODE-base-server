@@ -2,7 +2,6 @@ module.exports = (app) => {
     app.get('/', (req, res) => {
         res.send('Hello World!');
     });
-
     app.use(`/bill`, require("./bill.route"));
     app.use(`/category`, require("./category.route"));
     app.use(`/cart`, require("./cart.route"));
@@ -15,4 +14,5 @@ module.exports = (app) => {
     app.use(`/table-status`, require("./table-status.route"));
     app.use(`/user`, require("./user.route"));
     app.use(`/user-role`, require("./user-role.route"));
+    app.use(`/stores`, require("./stores.route"));
 }
