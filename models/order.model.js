@@ -3,12 +3,12 @@ const mongoose = require('mongoose');
 const orderSchema = new mongoose.Schema(
     {
         order_id: { type: String, required: true, unique: true },
-        table_id: { type: String, required: true },
-        bill_id: { type: String, required: true },
-        order_status: { type: String, required: true },
+        table_id: { type: String, },
+        bill_id: { type: String, },
+        order_status: { type: String, },
         order_items: [
             {
-                cart_id: { type: String, required: true },
+                cart_id: { type: String, },
             }
         ],
         order_time: { type: Date, default: Date.now }

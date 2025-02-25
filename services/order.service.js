@@ -1,5 +1,6 @@
 const { OrderModel } = require('../models');
 const { updateCartBy } = require('../services/cart.service');
+const filterEmthyKey = require('../utils/filterEmthyKey');
 
 const moment = require('moment');
 
@@ -46,9 +47,15 @@ const insertOrder = async (data) => {
 };
 
 const updateOrderBy = async (data) => {
+    const updateFields = filterEmthyKey(data, ["order_id"]);
+
+    if (Object.keys(updateFields).length === 0) {
+        throw new Error("No valid fields to update.");
+    }
+
     return await OrderModel.findOneAndUpdate(
         { order_id: data.order_id },
-        { $set: data },
+        { $set: updateFields },
         { new: true, runValidators: true }
     );
 };

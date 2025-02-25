@@ -36,8 +36,6 @@ const insertCart = async (data) => {
 };
 
 const updateCartBy = async (data) => {
-    console.log(data);
-
     const updateFields = filterEmthyKey(data, ["cart_id"]);
 
     if (Object.keys(updateFields).length === 0) {

@@ -9,10 +9,10 @@ const generateMenuID = async (digits = 3) => {
     const lastSequence = latestMenu ? parseInt(latestMenu.menu_id.split('-')[1]) : 0;
     let sequence = String(lastSequence + 1).padStart(digits, '0');
 
-    let newMenuID = `U${today}-${sequence}`;
+    let newMenuID = `MN${today}-${sequence}`;
     while (await MenuModel.exists({ menu_id: newMenuID })) {
         sequence = String(parseInt(sequence) + 1).padStart(digits, '0');
-        newMenuID = `U${today}-${sequence}`;
+        newMenuID = `MN${today}-${sequence}`;
     }
     return newMenuID;
 };
