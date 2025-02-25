@@ -11,5 +11,5 @@ module.exports = {
     TableStatusModel: require('./table-status.model'),
     UserModel: require('./user.model'),
     UserRoleModel: require('./user-role.model'),
-    StoresModel: require('./stores.model')
+    StoreModel: require('./store.model')
 }

@@ -14,5 +14,5 @@ module.exports = (app) => {
     app.use(`/table-status`, require("./table-status.route"));
     app.use(`/user`, require("./user.route"));
     app.use(`/user-role`, require("./user-role.route"));
-    app.use(`/stores`, require("./stores.route"));
+    app.use(`/store`, require("./store.route"));
 }

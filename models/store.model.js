@@ -3,15 +3,16 @@ const mongoose = require('mongoose');
 const storesSchema = new mongoose.Schema(
     {
         store_id: { type: String, required: true, unique: true },
-        user_id: { type: String },
-        store_name: { type: String, required: true },
-        store_slogan: { type: String, required: true },
+        store_name: { type: String },
+        store_slogan: { type: String },
         store_description: { type: String },
         store_address: { type: String },
-        store_price: { type: String },
+        store_price: { type: Number },
         store_phone: { type: String },
-        store_open: { type: Date },
-        store_close: { type: Date },
+        store_img: { type: String, },
+        store_logo: { type: String, },
+        store_open: { type: String },
+        store_close: { type: String },
         add_date: { type: Date, default: Date.now }
     }
 );

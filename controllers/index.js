@@ -11,5 +11,5 @@ module.exports = {
     TableStatusController: require('./table-status.controller'),
     UserController: require('./user.controller'),
     UserRoleController: require('./user-role.controller'),
-    StoresController: require('./stores.controller'),
+    StoreController: require('./store.controller'),
 };
